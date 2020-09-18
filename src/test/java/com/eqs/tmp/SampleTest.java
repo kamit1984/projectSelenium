@@ -5,6 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -28,7 +29,9 @@ public class SampleTest {
     public void setup(){
         System.out.println("In Setup");
         System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"/src/test/resources/executables/chromedriver");
+        System.setProperty("webdriver.gecko.driver",System.getProperty("user.dir")+"/src/test/resources/executables/geckodriver");
         driver = new ChromeDriver();
+//        driver = new FirefoxDriver();
         driver.manage().window().maximize();
         actions = new Actions(driver);
     }
@@ -43,14 +46,12 @@ public class SampleTest {
     @Test
     public void VerifyProductNames() throws InterruptedException {
         driver.get(testURL);
-        System.out.println("Inside test");
         Thread.sleep(5000);
 
         String title = driver.getTitle();
         Assert.assertEquals(title,"My Store");
 
         WebElement productGrid = driver.findElement(By.id("homefeatured"));
-
         List<WebElement> products = productGrid.findElements(By.className("product-container"));
 
         System.out.println("Found below products on the landing Page.");
@@ -113,7 +114,7 @@ public class SampleTest {
         Assert.assertEquals(landingURL,driver.getCurrentUrl());
     }
 
-    @Test
+    @Test(enabled = false)
     public  void VerifyCartCalculations() throws  InterruptedException{
         Integer quantityToOrder = new Integer(5);
         driver.get(testURL);
@@ -198,7 +199,7 @@ public class SampleTest {
 
     }
 
-    @Test
+    @Test(enabled = false)
     public void VerifyAddingDiscountedProductToCart() throws InterruptedException{
         driver.get(testURL);
         clearShoppingCartContents();
@@ -289,5 +290,13 @@ public class SampleTest {
         driver.get(testURL);
     }
 
+    @Test
+    public void testBaseClass() throws InterruptedException {
+        driver.get(testURL);
+        Thread.sleep(5000);
+
+        BaseClass base = new BaseClass();
+        base.VerifyProductNamesBaseClass(driver);
+    }
 
 }
