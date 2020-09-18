@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Create by Amit on 9/16/20
  */
-public class FirefoxTest {
+public class FirefoxTestTmp {
 
     public static WebDriver driver;
     private String testURL = "http://automationpractice.com/index.php";
@@ -311,7 +311,7 @@ public class FirefoxTest {
         driver.get(testURL);
         Thread.sleep(5000);
 
-        BaseClass base = new BaseClass();
+        BaseClassTmp base = new BaseClassTmp();
         base.VerifyProductNamesBaseClass(driver);
     }
 

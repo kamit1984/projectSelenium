@@ -1,28 +1,22 @@
 package com.eqs.tmp;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
-import java.util.List;
-
 /**
  * Create by Amit on 9/18/20
  */
-public class ChromeTests extends BaseClass{
+public class ChromeTestsTmp extends BaseClassTmp {
 
     public static WebDriver driver;
     private String testURL = "http://automationpractice.com/index.php";
@@ -116,4 +110,8 @@ public class ChromeTests extends BaseClass{
     }
 
 
+    @Override
+    public void VerifyProductNamesBaseClass(WebDriver driver) throws InterruptedException {
+        super.VerifyProductNamesBaseClass(driver);
+    }
 }

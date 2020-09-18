@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Create by Amit on 9/18/20
  */
-public class BaseClass {
+public class BaseClassTmp {
 
 //    public static Logger log = Logger.getLogger("MyLogger");
 //    static Logger log = Logger.getLogger(BaseClass.class.getName());
