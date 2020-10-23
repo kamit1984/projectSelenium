@@ -1,0 +1,22 @@
+1] To scroll on the webpage:
+    Do this if element to be actioned in not in the view pane.
+    scrollBy(x,y) - x for horizontal scroll, y for vertical scroll.
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,500)");
+
+2] Random number generator:
+        Random random = new Random();
+        int number = random.nextInt(1000000000);
+
+3] WebdriverWait statement:
+    WebDriverWait wait = new WebDriverWait(driver,15);
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#ember510"))).sendKeys(String.valueOf(number));
+
+4] Select statements to work with dropdowns:
+        Select select = new Select(driver.findElement(By.id("ember439")));
+        select.selectByVisibleText("Mr.");
+
+5] Examples of various selectors:
+        driver.findElement(By.id("ember540")).sendKeys("Amit") - using Id
+        driver.findElement(By.cssSelector("input[placeholder='Street']")) - using tag 'input' and attribute 'placeholder'
+        driver.findElement(By.tagName("button")).click(); - By tagName
