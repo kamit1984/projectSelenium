@@ -3,6 +3,7 @@ package com.idnow.testcases;
 import com.eqs.testcases.ChromeTests;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -26,6 +27,8 @@ public class Solution {
     public static void main(String args[] ) throws Exception {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT */
         String testURL = "https://go.idnow.de/ihrebank/userdata";
+        Random random = new Random();
+        int number = random.nextInt(1000000000);
 
         System.setProperty("webdriver.gecko.driver",System.getProperty("user.dir")+"/src/test/resources/executables/geckodriver");
         driver = new FirefoxDriver();
@@ -34,10 +37,21 @@ public class Solution {
         wait = new WebDriverWait(driver,15);
 
         driver.get(testURL);
-        // Add proper wait
-        Thread.sleep(5000);
+        Thread.sleep(2000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#ember510"))).sendKeys(String.valueOf(number));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        js.executeScript("document.body.style.zoom = '50%';");
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#ember510"))).sendKeys("123456789");
+//        for(int i=0; i<3; i++){
+//            robot.keyPress(KeyEvent.VK_CONTROL);
+//            robot.keyPress(KeyEvent.VK_MINUS);
+//            robot.keyRelease(KeyEvent.VK_CONTROL);
+//            robot.keyRelease(KeyEvent.VK_MINUS);
+//        }
+
+//        js.executeAsyncScript("window.scrollBy(0,500)");
+        js.executeScript("window.scrollBy(0,500)");
+
 
         Select select = new Select(driver.findElement(By.id("ember439")));
         select.selectByVisibleText("Mr.");
@@ -48,13 +62,8 @@ public class Solution {
         driver.findElement(By.id("ember540")).sendKeys("Amit");
         driver.findElement(By.id("ember542")).sendKeys("Kshirsagar");
 
-
-        WebElement sortButton = driver.findElement(By.id("ember469"));
-        actions.moveToElement(sortButton).build().perform();
-
         select = new Select(driver.findElement(By.id("ember469")));
-        select.selectByIndex(8);
-
+        select.selectByVisibleText("7");
         select = new Select(driver.findElement(By.id("ember471")));
         select.selectByVisibleText("January");
 
@@ -73,9 +82,10 @@ public class Solution {
 
         driver.findElement(By.id("ember1533")).sendKeys("kamit1984@gmail.com");
         driver.findElement(By.id("ember1536")).sendKeys("01514343434");
-        driver.findElement(By.id("start-has-webcam")).click();
-        driver.findElement(By.id("btn-proceed centered proceedButton")).click();
+        js.executeScript("window.scrollBy(0,1000)");
 
+        driver.findElement(By.id("start-has-webcam")).click();
+        driver.findElement(By.tagName("button")).click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("mobile-step")));
         String expectedToken = driver.findElement(By.className("transaction-token")).getText();
