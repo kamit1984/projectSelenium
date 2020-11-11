@@ -1,26 +1,19 @@
-package com.idnow.testcases;
+package com.automationpractice.testcases;
 
-import com.eqs.testcases.ChromeTests;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.io.*;
 import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
 
 public class Solution {
     public static WebDriver driver;
-    static Logger log = Logger.getLogger(ChromeTests.class.getName());
+    static Logger log = Logger.getLogger(Solution.class.getName());
     static Actions actions;
     static WebDriverWait wait;
 
@@ -37,21 +30,9 @@ public class Solution {
         wait = new WebDriverWait(driver,15);
 
         driver.get(testURL);
-        Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#ember510"))).sendKeys(String.valueOf(number));
         JavascriptExecutor js = (JavascriptExecutor) driver;
-//        js.executeScript("document.body.style.zoom = '50%';");
-
-//        for(int i=0; i<3; i++){
-//            robot.keyPress(KeyEvent.VK_CONTROL);
-//            robot.keyPress(KeyEvent.VK_MINUS);
-//            robot.keyRelease(KeyEvent.VK_CONTROL);
-//            robot.keyRelease(KeyEvent.VK_MINUS);
-//        }
-
-//        js.executeAsyncScript("window.scrollBy(0,500)");
         js.executeScript("window.scrollBy(0,500)");
-
 
         Select select = new Select(driver.findElement(By.id("ember439")));
         select.selectByVisibleText("Mr.");
@@ -59,8 +40,9 @@ public class Solution {
         select = new Select(driver.findElement(By.id("ember442")));
         select.selectByVisibleText("Dr.");
 
-        driver.findElement(By.id("ember540")).sendKeys("Amit");
-        driver.findElement(By.id("ember542")).sendKeys("Kshirsagar");
+
+        driver.findElement(By.cssSelector("input[placeholder*='All given names']")).sendKeys("Amit");
+        driver.findElement(By.cssSelector("input[placeholder*='surname']")).sendKeys("Kshirsagar");
 
         select = new Select(driver.findElement(By.id("ember469")));
         select.selectByVisibleText("7");
@@ -70,13 +52,12 @@ public class Solution {
         select = new Select(driver.findElement(By.id("ember473")));
         select.selectByVisibleText("1984");
 
-        driver.findElement(By.id("ember848")).sendKeys("Pune");
-
-
+        driver.findElement(By.cssSelector("input[placeholder*='place of birth']")).sendKeys("Pune");
         driver.findElement(By.cssSelector("input[placeholder='Street']")).sendKeys("Wasserburger Landstr.");
         driver.findElement(By.cssSelector("input[placeholder='House No.']")).sendKeys("204a");
         driver.findElement(By.cssSelector("input[placeholder='ZIP Code']")).sendKeys("81827");
         driver.findElement(By.cssSelector("input[placeholder='City']")).sendKeys("Munchen");
+
         select = new Select(driver.findElement(By.id("ember478")));
         select.selectByVisibleText("Germany");
 
@@ -89,7 +70,7 @@ public class Solution {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("mobile-step")));
         String expectedToken = driver.findElement(By.className("transaction-token")).getText();
+        assert(expectedToken != null);
         System.out.println("Expected Token =  " + expectedToken);
-
     }
 }

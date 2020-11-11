@@ -1,5 +1,6 @@
-package com.eqs.tmp;
+package com.automationpractice.testcases;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,19 +17,19 @@ import org.testng.annotations.Test;
 /**
  * Create by Amit on 9/18/20
  */
-public class ChromeTestsTmp extends BaseClassTmp {
+public class ChromeTests extends BaseClass {
 
     public static WebDriver driver;
     private String testURL = "http://automationpractice.com/index.php";
+    static Logger log = Logger.getLogger(ChromeTests.class.getName());
     Actions actions;
     WebDriverWait wait;
-//    BaseClass base = new BaseClass();
 
     @Parameters({"browser"})
     @BeforeTest
     public void setup(String browser){
-        System.out.println("Browser name passed = " + browser);
-        System.out.println("In Setup");
+        log.info("Browser name passed = " + browser);
+        log.info("In ChromeTests Setup");
 
         if(browser.toLowerCase().contains("firefox")){
             System.setProperty("webdriver.gecko.driver",System.getProperty("user.dir")+"/src/test/resources/executables/geckodriver");
@@ -44,7 +45,7 @@ public class ChromeTestsTmp extends BaseClassTmp {
 
     @AfterTest
     public void tearDown() throws InterruptedException{
-        System.out.println("In TearDown");
+        log.info("In ChromeTests TearDown");
         driver.quit();
         Thread.sleep(5000);
     }
@@ -61,8 +62,6 @@ public class ChromeTestsTmp extends BaseClassTmp {
     public  void VerifyChangingProductColors() throws  InterruptedException{
         driver.get("http://automationpractice.com/index.php?id_product=5&controller=product");
         Thread.sleep(5000);
-//        BaseClass base = new BaseClass();
-//        base.VerifyProductNamesBaseClass(driver);
         VerifyChangingProductColorsBase(driver);
     }
 
@@ -85,13 +84,12 @@ public class ChromeTestsTmp extends BaseClassTmp {
     public  void VerifyCartCalculations() throws  InterruptedException{
         driver.get(testURL);
         Thread.sleep(2000);
-        VerifyAddingDiscountedProductToCartBase(driver);
+        VerifyCartCalculationsBase(driver);
     }
 
     @Test(enabled = false)
     public void VerifySortingOfProducts() throws  InterruptedException{
         driver.get("http://automationpractice.com/index.php?id_category=3&controller=category");
-        System.out.println("Inside test");
         Thread.sleep(3000);
 
         Actions actions = new Actions(driver);
@@ -110,8 +108,4 @@ public class ChromeTestsTmp extends BaseClassTmp {
     }
 
 
-    @Override
-    public void VerifyProductNamesBaseClass(WebDriver driver) throws InterruptedException {
-        super.VerifyProductNamesBaseClass(driver);
-    }
 }

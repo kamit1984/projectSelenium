@@ -1,4 +1,4 @@
-package com.eqs.testcases;
+package com.automationpractice.testcases;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -17,7 +17,6 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.Random;
 
 /**
