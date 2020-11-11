@@ -12,16 +12,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * Create by Amit on 11/11/20
  */
-public class OrderToCashTest {
+public class ServiceNowTest {
 
-    static Logger log = Logger.getLogger(OrderToCashTest.class.getName());
+    static Logger log = Logger.getLogger(ServiceNowTest.class.getName());
     private Utilities utilities;
     private LoginPage loginPage;
 
@@ -40,7 +38,7 @@ public class OrderToCashTest {
     }
 
     @Test
-    public void verifyProcessExplorerCreationFor_SAP_ECC_OrderToCash(){
+    public void verifyProcessExplorerCreationFor_ServiceNowTicketing(){
         loginPage = new LoginPage();
         loginPage.performLogin();
         try { Thread.sleep(5000); } catch (InterruptedException e) { e.printStackTrace();}
@@ -49,7 +47,7 @@ public class OrderToCashTest {
         ProcessAnalyticsPage processAnalyticsPage = new ProcessAnalyticsPage();
 
         processAnalyticsPage.openProcessAnalytics();
-        processAnalyticsPage.openAnalysis("--> SAP ECC - Order to Cash");
+        processAnalyticsPage.openAnalysis("--> ServiceNow Ticketing");
         processAnalyticsPage.addNewProcessExplorer();
 
         // Verifying different icons are displayed on Process Explorer
@@ -111,7 +109,7 @@ public class OrderToCashTest {
         ProcessAnalyticsPage processAnalyticsPage = new ProcessAnalyticsPage();
 
         processAnalyticsPage.openProcessAnalytics();
-        processAnalyticsPage.openAnalysis("--> SAP ECC - Order to Cash");
+        processAnalyticsPage.openAnalysis("--> ServiceNow Ticketing");
         processAnalyticsPage.addNewProcessExplorer();
         processAnalyticsPage.addNewProcessOverview();
         processAnalyticsPage.moveToSheet("Process Explorer");

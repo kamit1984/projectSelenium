@@ -59,6 +59,11 @@ public class ProcessAnalyticsPage extends BasePage {
         Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Add new App')]"))).isDisplayed());
     }
 
+    public void moveToSheet(String sheetName){
+        driver.findElement(By.xpath("//div[@data-testing-uid=\"sheetTab-tab-bottomTabs\"]/div[contains(text(),'" + sheetName + "')]")).click();
+        try { Thread.sleep(1000); } catch (InterruptedException e) { e.printStackTrace();}  // Thread sleep
+    }
+
     public void deleteSheet(String sheetName) {
         List<WebElement> sheets = driver.findElements(By.xpath("//div[@data-testing-uid=\"sheetTab-tab-bottomTabs\"]"));
         for (WebElement sheet: sheets) {
@@ -85,7 +90,6 @@ public class ProcessAnalyticsPage extends BasePage {
         Assert.assertTrue(isFooterTabPresent(nameOfComponent),"New component "+nameOfComponent+" is not opened correctly.");
     }
 
-
     public boolean isFooterTabPresent(String nameOfTab){
         logger.info("Verifying presence of Footer tab " + nameOfTab);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'"+nameOfTab+"')]")));
@@ -97,5 +101,20 @@ public class ProcessAnalyticsPage extends BasePage {
             flag = false;
         }
         return flag;
+    }
+
+    public void setActivitiesPercentageTo100(){
+////div[@class="pe-standalone__control pe-standalone__control--activities flex-vertical"]//button[@title="Add next important activity to the chart"]
+////div[@class="pe-standalone__control pe-standalone__control--activities flex-vertical"]//div[@class="ce-percentage-circle-content text-center"]
+        String percentage = driver.findElement(By.xpath("//div[@class=\"pe-standalone__control pe-standalone__control--activities flex-vertical\"]//div[@class=\"ce-percentage-circle-content text-center\"]")).getText();
+        int count = 0;
+
+        while (count < 15 || (!percentage.equals("100%"))){
+            driver.findElement(By.xpath("//div[@class=\"pe-standalone__control pe-standalone__control--activities flex-vertical\"]//button[@title=\"Add next important activity to the chart\"]")).click();
+            try { Thread.sleep(1000); } catch (InterruptedException e) { e.printStackTrace();}  // Thread sleep
+            percentage = driver.findElement(By.xpath("//div[@class=\"pe-standalone__control pe-standalone__control--activities flex-vertical\"]//div[@class=\"ce-percentage-circle-content text-center\"]")).getText();
+            logger.info("Current percentage = "+ percentage);
+            count++;
+        }
     }
 }

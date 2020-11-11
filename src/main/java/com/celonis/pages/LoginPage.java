@@ -19,7 +19,7 @@ public class LoginPage extends BasePage{
         driver.get(testURL);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input#ce-input-0"))).isDisplayed();
         driver.findElement(By.cssSelector("input[data-testing-uid='login-form-username-input']")).sendKeys("kamit1984@gmail.com");
-        driver.findElement(By.cssSelector("input[data-testing-uid='login-form-password-input']")).sendKeys("");
+        driver.findElement(By.cssSelector("input[data-testing-uid='login-form-password-input']")).sendKeys("Dc6$fb08");
         driver.findElement(By.cssSelector("button[cetestinguid='login-form-submit-button']")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Process Analytics')]"))).isDisplayed();
     }

@@ -12,25 +12,22 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * Create by Amit on 11/11/20
  */
-public class OrderToCashTest {
+public class PurchaseToPayTest {
 
-    static Logger log = Logger.getLogger(OrderToCashTest.class.getName());
+    static Logger log = Logger.getLogger(PurchaseToPayTest.class.getName());
     private Utilities utilities;
     private LoginPage loginPage;
 
     @BeforeTest
     //    public void setup(String browser){
     public void setup(){
-//        log.info("Browser name passed = " + browser);
-            log.info("In Setup");
-           utilities = new Utilities();
+        log.info("In Setup");
+        utilities = new Utilities();
     }
 
     @AfterTest
@@ -40,8 +37,8 @@ public class OrderToCashTest {
     }
 
     @Test
-    public void verifyProcessExplorerCreationFor_SAP_ECC_OrderToCash(){
-        loginPage = new LoginPage();
+    public void verifyProcessExplorerCreationFor_SAP_ECC_PurchaseToPay(){
+        LoginPage loginPage = new LoginPage();
         loginPage.performLogin();
         try { Thread.sleep(5000); } catch (InterruptedException e) { e.printStackTrace();}
         HomePage homePage = new HomePage();
@@ -49,7 +46,7 @@ public class OrderToCashTest {
         ProcessAnalyticsPage processAnalyticsPage = new ProcessAnalyticsPage();
 
         processAnalyticsPage.openProcessAnalytics();
-        processAnalyticsPage.openAnalysis("--> SAP ECC - Order to Cash");
+        processAnalyticsPage.openAnalysis("--> SAP ECC - Purchase to Pay");
         processAnalyticsPage.addNewProcessExplorer();
 
         // Verifying different icons are displayed on Process Explorer
@@ -111,12 +108,11 @@ public class OrderToCashTest {
         ProcessAnalyticsPage processAnalyticsPage = new ProcessAnalyticsPage();
 
         processAnalyticsPage.openProcessAnalytics();
-        processAnalyticsPage.openAnalysis("--> SAP ECC - Order to Cash");
+        processAnalyticsPage.openAnalysis("--> SAP ECC - Purchase to Pay");
         processAnalyticsPage.addNewProcessExplorer();
         processAnalyticsPage.addNewProcessOverview();
         processAnalyticsPage.moveToSheet("Process Explorer");
         processAnalyticsPage.setActivitiesPercentageTo100();
-
     }
 
 }
