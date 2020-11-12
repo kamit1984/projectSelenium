@@ -37,7 +37,7 @@ public class ServiceNowTest {
         loginPage.driver.close();
     }
 
-    @Test
+    @Test(groups = {"Regression"})
     public void verifyProcessExplorerCreationFor_ServiceNowTicketing(){
         loginPage = new LoginPage();
         loginPage.performLogin();

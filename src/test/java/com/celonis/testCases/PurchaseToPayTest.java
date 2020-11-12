@@ -36,7 +36,7 @@ public class PurchaseToPayTest {
         loginPage.driver.close();
     }
 
-    @Test
+    @Test(groups = {"Regression"})
     public void verifyProcessExplorerCreationFor_SAP_ECC_PurchaseToPay(){
         LoginPage loginPage = new LoginPage();
         loginPage.performLogin();

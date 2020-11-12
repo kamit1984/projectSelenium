@@ -36,10 +36,10 @@ public class OrderToCashTest {
     @AfterTest
     public void tearDown() throws InterruptedException{
         log.info("In TearDown");
-        loginPage.driver.close();
+        loginPage.driver.quit();
     }
 
-    @Test
+    @Test(groups = {"Smoke","Regression"})
     public void verifyProcessExplorerCreationFor_SAP_ECC_OrderToCash(){
         loginPage = new LoginPage();
         loginPage.performLogin();

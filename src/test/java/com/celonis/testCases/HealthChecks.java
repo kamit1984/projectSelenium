@@ -8,9 +8,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,25 +20,24 @@ import java.util.List;
 public class HealthChecks {
 
     static Logger log = Logger.getLogger(HealthChecks.class.getName());
-    Utilities utilities;
+    private Utilities utilities;
+    private LoginPage loginPage;
 
     @BeforeTest
-    //    public void setup(String browser){
     public void setup(){
-//        log.info("Browser name passed = " + browser);
-            log.info("In Setup");
-           utilities = new Utilities();
+        log.info("In Setup");
+       utilities = new Utilities();
     }
 
     @AfterTest
     public void tearDown() throws InterruptedException{
         log.info("In TearDown");
+        loginPage.driver.quit();
     }
 
-
-    @Test
+    @Test(groups = {"Smoke"})
     public void LoginLogoutWithPageObjectsTest(){
-        LoginPage loginPage = new LoginPage();
+        loginPage = new LoginPage();
         loginPage.performLogin();
         try { Thread.sleep(5000); } catch (InterruptedException e) { e.printStackTrace();}
         HomePage homePage = new HomePage();
@@ -59,13 +56,12 @@ public class HealthChecks {
         Assert.assertTrue(processAutomationTab.isDisplayed(),"Login into Celonis Cloud is not successful.");
         Assert.assertTrue(businessViewsTab.isDisplayed(),"Login into Celonis Cloud is not successful.");
         Assert.assertTrue(studioTab.isDisplayed(),"Login into Celonis Cloud is not successful.");
-
         homePage.performLogout();
     }
 
-    @Test
+    @Test(groups = {"Smoke"})
     public void VerifyPresenceOfDemoAnalyses() {
-        LoginPage loginPage = new LoginPage();
+        loginPage = new LoginPage();
         loginPage.performLogin();
         try { Thread.sleep(5000); } catch (InterruptedException e) { e.printStackTrace();}
         HomePage homePage = new HomePage();
@@ -108,8 +104,5 @@ public class HealthChecks {
         }
 
         homePage.performLogout();
-        homePage.driver.quit();
     }
-
-
 }
